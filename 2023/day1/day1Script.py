@@ -20,6 +20,7 @@ with open(fin) as f:
         # print(line.strip())
        
         # From left
+        #   - note that 'eightwo' becomes '8wo'
         newLine = ''
         for c in line:
             newLine = newLine + c
@@ -28,6 +29,7 @@ with open(fin) as f:
                     newLine = newLine.replace(word,num)
                     
         # From right (reversed)
+        #   - note that 'eightwo' becomes 'eigh2'
         newLine2 = ''
         for i in range(len(line),0,-1):
             newLine2 += line[i-1]
