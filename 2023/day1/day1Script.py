@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 fin = 'day1Input.txt'
 
 linecodes = []
@@ -15,18 +17,17 @@ tempHash = {'one':'1',
 with open(fin) as f:
     for line in f.readlines():
         line = line.strip().lower()
-        print(line.strip())
+        # print(line.strip())
        
+        # From left
         newLine = ''
-        found = False
         for c in line:
             newLine = newLine + c
             for word,num in tempHash.items():
                 if word in newLine:
                     newLine = newLine.replace(word,num)
-                    found = True
-                    #break
-           
+                    
+        # From right (reversed)
         newLine2 = ''
         for i in range(len(line),0,-1):
             newLine2 += line[i-1]
@@ -34,10 +35,13 @@ with open(fin) as f:
                 if word in newLine2[::-1]:
                     newLine2 = newLine2.replace(word[::-1],num)
        
-        newLine2 = newLine2[::-1]
+        # Put reversed line in correct order
+        newLine2 = newLine2[::-1]        
         print(newLine,newLine2)
+        
         temp = [int(i) for i in newLine if i.isdigit()]
         temp2 = [int(i) for i in newLine2 if i.isdigit()]
+        
         print(temp[0],temp2[-1])
         linecodes.append(str(temp[0])+str(temp2[-1]))
 
