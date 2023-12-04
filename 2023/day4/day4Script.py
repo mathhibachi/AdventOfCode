@@ -10,6 +10,9 @@ fin = 'day4Input2.txt'
 data = get_data(day=4, year=2023).splitlines()
 
 points = 0
+
+[cardCounts[x] = 1 for x in data]
+
 with open(fin) as f:
   for line in f.readlines():
 
