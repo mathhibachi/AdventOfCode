@@ -89,23 +89,21 @@ for x in maps:
     allMaps.append(maps[x])
 
 seeds = [int(x) for x in seeds]
-seeds2 = []
-seeds3 = []
+
 rngs = []
 locs = []
 for i in range(0,len(seeds)-1,2):
     #print(seeds[i])
-    seeds2.append(seeds[i])
     rngs.append(range(seeds[i],seeds[i]+seeds[i+1]))
-    for x in range(seeds[i],seeds[i]+seeds[i+1]):
-        seed = x
-        route = [seed]
+    
+for seedRange in rngs:
+    for seed in seedRange:
+        x = seed
         for plantMap in allMaps:
-            seed = plantMap.getOutput(seed)
-            route.append(seed)
-        #print(x,seed,route)
-        locs.append(seed)
+            x = plantMap.getOutput(x)
+        locs.append(x)
 
+print(min(locs))
 # routes = []
 # locs = []
 # for seed in seeds:
@@ -118,6 +116,6 @@ for i in range(0,len(seeds)-1,2):
 #     print(seed,x,route)
 #     locs.append(x)
 #     #print(y)
-print(min(locs))
+
 # print(maps['seed2soil'].inputs)
 # print(maps['seed2soil'].outputs)
