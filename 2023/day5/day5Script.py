@@ -3,7 +3,7 @@
 from aocd.models import Puzzle
 
 puz = Puzzle(year=2023,day=5)
-exData = puz.example_data.splitlines()
+exData = puz.examples[0].input_data.splitlines()
 inData = puz.input_data.splitlines()
 
 exData = [x for x in exData if len(x)>0]
@@ -25,16 +25,24 @@ class plantingMap:
         self.srcRng.append(line[2])
         self.dstStart.append(line[0])
         
-        for x in range(line[1],line[1]+line[2]):
-            self.inputs.append(x)
-        for x in range(line[0],line[0]+line[2]):
-            self.outputs.append(x)
+        # for x in range(line[1],line[1]+line[2]):
+        #     self.inputs.append(x)
+        # for x in range(line[0],line[0]+line[2]):
+        #     self.outputs.append(x)
     
     def getOutput(self,inValue):
-        if inValue in self.inputs:
-            return self.outputs[self.inputs.index(inValue)]
+        out = -1
+        for i,start in enumerate(self.srcStart):
+            if inValue>=start and inValue<start+self.srcRng[i]:
+                out = self.dstStart[i]+(inValue-start)
+        if out > -1:
+            return out
         else:
             return inValue
+        # if inValue in self.inputs:
+        #     return self.outputs[self.inputs.index(inValue)]
+        # else:
+            # return inValue
                             
         
 section = ''
@@ -80,18 +88,36 @@ for line in inData:
 for x in maps:
     allMaps.append(maps[x])
 
-routes = []
+seeds = [int(x) for x in seeds]
+seeds2 = []
+seeds3 = []
+rngs = []
 locs = []
-for seed in seeds:
-    x = int(seed)
-    route = [x]
-    for plantMap in allMaps:
-        x = plantMap.getOutput(x)
-        route.append(x)
+for i in range(0,len(seeds)-1,2):
+    #print(seeds[i])
+    seeds2.append(seeds[i])
+    rngs.append(range(seeds[i],seeds[i]+seeds[i+1]))
+    for x in range(seeds[i],seeds[i]+seeds[i+1]):
+        seed = x
+        route = [seed]
+        for plantMap in allMaps:
+            seed = plantMap.getOutput(seed)
+            route.append(seed)
+        #print(x,seed,route)
+        locs.append(seed)
+
+# routes = []
+# locs = []
+# for seed in seeds:
+#     x = int(seed)
+#     route = [x]
+#     for plantMap in allMaps:
+#         x = plantMap.getOutput(x)
+#         route.append(x)
         
-    print(seed,x,route)
-    locs.append(x)
-    #print(y)
+#     print(seed,x,route)
+#     locs.append(x)
+#     #print(y)
 print(min(locs))
 # print(maps['seed2soil'].inputs)
 # print(maps['seed2soil'].outputs)
