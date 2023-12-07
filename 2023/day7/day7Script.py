@@ -29,9 +29,11 @@ def getHandType(hand):
             if len(handUnique) == 2:
                 return 'fullHouse'
             elif len(handUnique) == 3:
-                for otherCard in handUnique:
-                    if otherCard == card:
-                        print()
+                for x in handUnique:
+                    if x == card:
+                        continue
+                    elif hand.count(x) == 2:
+                        return 'twoPair'
         else:
             return 'N/A'
         
