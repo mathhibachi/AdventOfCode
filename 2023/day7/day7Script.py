@@ -34,6 +34,9 @@ def getHandType(hand):
                         continue
                     elif hand.count(x) == 2:
                         return 'twoPair'
+                if hand(handUnique) == 2:
+                    return ''
+            
         else:
             return 'N/A'
         
