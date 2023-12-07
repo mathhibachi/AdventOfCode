@@ -34,14 +34,50 @@ def getHandType(hand):
                         continue
                     elif hand.count(x) == 2:
                         return 'twoPair'
-                if hand(handUnique) == 2:
-                    return ''
+                return 'onePair'
+            else:
+                return 'onePair'
+        elif hand.count(card) == 1:
+            if len(handUnique) == 5:
+                return 'highCard'
+            elif len(handUnique) == 2:
+                return 'fourKind'
+            elif len(handUnique) == 3:
+                pairs = []
+                for x in handUnique:
+                    if x == card:
+                        continue
+                    elif hand.count(x) == 3:
+                        return 'threeKind'
+                    elif hand.count(x) == 2 and x not in pairs:
+                        pairs.append(x)
+                    else:
+                        continue
+                if len(pairs) == 2:
+                    return 'twoPair'
+                elif len(pairs) == 1:
+                    return 'onePair'
+                return 'highCard'
+            elif len(handUnique) == 4:
+                return 'onePair'
+            else:
+                return 'highCard'
             
         else:
             return 'N/A'
-        
-for line in exData:
+
+#exData.append('J488Q 100')
+handPoints = {}
+hands = []
+for i,line in enumerate(exData):
     [hand,bid] = line.split(' ')
-    print(hand,end=': ')
-    print(getHandType(hand))
+    # print(hand,end=': ')
+    handType = getHandType(hand)
+    handPoints = handRanks[handType]
+    hands.append([hand,bid,handType,handPoints])
+
+sortedHands = sorted(hands, key=lambda hand: hand[3], reverse=True)
+
+for i,hand in enumerate(sortedHands):
+    print(hand[0],hand[1],hand[2],hand[3])
     
