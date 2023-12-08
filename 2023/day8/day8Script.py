@@ -14,22 +14,27 @@ with open('day8Input3.txt') as f:
   for line in f.readlines():
       exData2.append(line.strip())
 
+# Set data set to use for testing
 data = inData
+
+# LRRLL...
 directions = data[0]
 
+# AAA = (BBB, CCC)
 turnData = data[2:]
 
+# turns['AAA'] = {'L':'BBB', 'R':'CCC'}
 turns = {}
+# inTurns = ['AAA',...]
 inTurns = []
-outTurns = {'L':[],'R':[]}
 for line in turnData:
     inTurns.append(line.split(' ')[0])
-    outTurns['L'].append(line.split('(')[1].split(',')[0])
     turns[line.split(' ')[0]] = {'L':line.split('(')[1].split(',')[0],
                                  'R':line.split(', ')[1].split(')')[0]}
 
 inputs = [x for x in inTurns if x[-1]=='A']
 counts = []
+# Gather up how many turns it takes to go from initial value to end (for each input)
 for inp in inputs:
     count = 0
     while count < 100000:
