@@ -42,41 +42,10 @@ for inp in inputs:
         inp = out
     print(counts)
 
+# LCM not available in python 3.8, so used GCD
 temp = 1
 for i in counts:
     temp = temp*i // math.gcd(temp,i)
 
 print(temp)
 
-# while count < 100000:
-#     i = count % len(directions)
-#     outs = []
-#     for inp in inputs:
-#         outs.append(turns[inp][directions[i]])
-#     temp = [x for x in outs if x[-1]=='Z']
-#     if len(temp) == len(outs):
-#         print('Made it in '+str(count+1)+' turns')
-#         break
-#     count += 1
-#     inputs = outs
-    
-#print(turns)
-#inp = inTurns[0]
-#inp = 'AAA'
-# count = 0
-# while count<1000000:
-#     i = count % len(directions)
-#     #print(i)
-#     if inp in inTurns:
-#         out = turns[inp][directions[i]]
-#     else:
-#         print('Not a valid input')
-#         break
-#     #print(inp,out)
-#     if out=='ZZZ':
-#         print('Made it in '+str(count+1)+' turns')
-#         break
-#     count += 1
-#     inp = out
-    
-# re.find   
