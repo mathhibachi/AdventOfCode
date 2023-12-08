@@ -3,6 +3,8 @@
 from aocd.models import Puzzle
 import threading
 
+# Started down the path of threading but ended up abandoning
+
 def runStuff():
     
     puz = Puzzle(year=2023,day=8)
