@@ -67,3 +67,17 @@ rowSums[count] += solvePattern(transpose(newData[count]),False)
 #     else:
 #         print(npData)
 #         npData = np.array([])
+
+# def solvePattern(pattern, y):
+# 	pattern = ["".join(x) for x in pattern]
+# 	for i in range(len(pattern)-1):
+# 		# reflect [0...i] to [i+1...len(pattern)-1]
+# 		smudges = 0
+# 		for j in range(len(pattern)):
+# 			if i+1+(i-j) in range(len(pattern)) and \
+    #                      pattern[j] != pattern[i+1+(i-j)]:
+# 				smudges += len([k for k in range(len(pattern[j])) if \
+    #                       pattern[j][k] != pattern[i+1+(i-j)][k]])
+# 		if smudges == y:
+# 			return i
+# 	return None
